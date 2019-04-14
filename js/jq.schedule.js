@@ -16,6 +16,7 @@
             dataWidth:160,		// data width
             verticalScrollbar:0,	// vertical scrollbar width
             bundleMoveWidth:1,  // width to move all schedules to the right of the clicked time cell
+            displayOver24H: true, //24時以降（25:00,26:00...）の表示をするかどうか
             // event
             init_data: null,
             change: null,
@@ -35,6 +36,9 @@
             var h = "" + (min/36000|0) + (min/3600%10|0);
             var i = "" + (min%3600/600|0) + (min%3600/60%10|0);
             var string = h + ":" + i;
+            if(Number(h) >= 24 && setting.displayOver24H == false){
+                string = "" + (Number(h) - 24) + ":" + i;
+            }
             return string;
         };
 
